@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {ServiceAPIService} from '../service-api.service'
 
 @Component({
   selector: 'app-apigit',
@@ -7,16 +8,18 @@ import {HttpClientModule} from '@angular/common/http';
   styleUrls: ['./apigit.component.css']
 })
 export class APIGitComponent implements OnInit {
-  private url = "";
+  private url = "https://api.github.com/repos/Antdryem/entregaGit-API/commits";
   /**
    * takeGitData
    */
-  public takeGitData() {
-    
-  }
-  constructor() { }
 
+  constructor(private webService: ServiceAPIService) { }
+  public data;
   ngOnInit(): void {
+    this.data = this.webService.consumeService(this.url).subscribe((response)=>{
+
+    console.log(response)
+    });
   }
 
 }
